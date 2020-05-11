@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <p>
+    <strong>{{ message }}</strong>
+  </p>
+  <form method="post">
+    {% csrf_token %}
+    Użytkownik:  {{ form.username }}</br>
+    Hasło:  {{ form.password_1 }}</br>
+    Powtórz hasło:  {{ form.password_2 }}</br>
+    E-mail:  {{ form.email }}</br>
+    {{ form.consent }} Oświadczam, że zapoznałem się z <a href="/polityka_prywatnosci">Polityką prywatności</a> serwisu "Adoptuj radysiaka!" oraz informacją dotyczącą plików cookies.  Wyrażam zgodę na przetwarzanie moich danych osobowych w celu utworzenia i obsługi konta użytkownika oraz publikacji ogłoszeń.</br>
+    {{ form.terms_of_use }} Oświadczam, że zapoznałem się z <a href="/regulamin">Regulaminem</a> serwisu "Adoptuj radysiaka!".</br>
+    <input type="submit" value="Wyślij" class="btn btn-default">
+  </form>
+{% endblock %}

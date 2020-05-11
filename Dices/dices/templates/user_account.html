@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+ <p>
+   Użytkownik: <strong>{{ user.username }}</strong></br>
+   Tutaj możesz edytować swoje konto i dodane ogłoszenia</br>
+   <a href="/moje_psy/" class="btn btn-info">Twoje ogłoszenia</a>
+   <a href="/haslo/" class="btn btn-warning">Zmień hasło</a>
+   <a href="/email/" class="btn btn-warning">Zmień adres e-mail</a>
+   <a href="/wyloguj/" class="btn btn-default">Wyloguj</a>
+   <a href="/usun_konto_potwierdz/" class="btn btn-danger">Usuń konto</a>
+  </p>
+{% endblock %}

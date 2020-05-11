@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+ <p>
+   Użytkownik: <strong>{{ user.username }}</strong></br>
+   <form method="post">
+     {% csrf_token %}
+     Nowy e-mail:  {{ form.email }}</br>
+     <input type="submit" value="Zapisz" class="btn btn-default">
+    </form>
+  </p>
+{% endblock %}
