@@ -1,6 +1,10 @@
 from django import forms
 from django.contrib.auth.models import User
-# from .models import
+from .models import Roll
 
-class Game1Form(forms.Form):
-    pass
+
+
+class Game1ChoiceForm(forms.ModelForm):
+    class Meta:
+        model = Roll
+        fields = '__all__'

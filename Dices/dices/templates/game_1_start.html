@@ -1,8 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form method="post">
-      {% csrf_token %}
-      <button type="submit" class="btn btn-info">Start</button>
-    </form>
+  <p>
+    Your numbers: {{ numbers }}</br>
+  </p>
+  <form method="post">
+    {% csrf_token %}
+    Which dices would you like to put aside?</br>
+    {{ form.dice_1 }}</br>
+    {{ form.dice_2 }}</br>
+    {{ form.dice_3 }}</br>
+    {{ form.dice_4 }}</br>
+    {{ form.dice_5 }}</br>
+    <input type="submit" value="Put aside" class="btn btn-default">
+  </form>
 {% endblock %}
