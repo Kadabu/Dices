@@ -3,15 +3,11 @@
 {% block content %}
   <p>
     Your numbers: {{ numbers }}</br>
+    Choose dices to put aside
   </p>
   <form method="post">
     {% csrf_token %}
-    Which dices would you like to put aside?</br>
-    {{ form.dice_1 }}</br>
-    {{ form.dice_2 }}</br>
-    {{ form.dice_3 }}</br>
-    {{ form.dice_4 }}</br>
-    {{ form.dice_5 }}</br>
-    <input type="submit" value="Put aside" class="btn btn-default">
-  </form>
+    {{ form.put_aside }}
+    <button type="submit" class="btn btn-warning">Put aside</button>
+</form>
 {% endblock %}
