@@ -8,3 +8,4 @@ class Roll(models.Model):
     dice_3 = models.IntegerField()
     dice_4 = models.IntegerField()
     dice_5 = models.IntegerField()
+    game_no = models.IntegerField(unique=True)
