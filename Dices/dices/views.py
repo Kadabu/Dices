@@ -56,13 +56,13 @@ class Game1(View):
                     else:
                         result += 120
                 elif len(set(chosen_numbers)) == 2:
-                    if [1, 1, 1, 1, 5] in chosen_numbers:
+                    if [1, 1, 1, 1] in chosen_numbers and 5 in chosen_numbers:
                         result += 205
-                    if [1, 1, 1, 5, 5] in chosen_numbers:
+                    if [1, 1, 1] in chosen_numbers and [5, 5] in chosen_numbers:
                         result += 110
-                    if [1, 1, 5, 5, 5] in chosen_numbers:
+                    if [1, 1] in chosen_numbers and [5, 5, 5] in chosen_numbers:
                         result += 70
-                    if [1, 5, 5, 5, 5] in chosen_numbers:
+                    if [5, 5, 5, 5] in chosen_numbers and 1 in chosen_numbers:
                         result += 110
                     if [1, 1] in chosen_numbers: #and not 5 in chosen_numbers?
                         result += 50
@@ -75,7 +75,7 @@ class Game1(View):
                     else:
                         return HttpResponseRedirect('/game_1/')#komunikat o błędzie w formularzu - jak wyświetlić???
                 elif len(set(chosen_numbers)) == 3:
-                    if [1, 5] in chosen_numbers:
+                    if 1 in chosen_numbers and 5 in chosen_numbers:
                         result += 45
                     else:
                         return HttpResponseRedirect('/game_1/')  #komunikat o błędzie w formularzu
@@ -92,11 +92,11 @@ class Game1(View):
                     else:
                         result += 60
                 elif len(set(chosen_numbers)) == 2:
-                    if [1, 1, 1, 5] in chosen_numbers:
+                    if [1, 1, 1] in chosen_numbers and 5 in chosen_numbers:
                         result += 105
-                    elif [1, 1, 5, 5] in chosen_numbers:
+                    elif [1, 1] in chosen_numbers and [5, 5] in chosen_numbers:
                         result += 30
-                    elif [1, 5, 5, 5] in chosen_numbers:
+                    elif [5, 5, 5] in chosen_numbers and 1 in chosen_numbers:
                         result += 60
                     elif [5, 5, 5, 5] in chosen_numbers:
                         result += 100
@@ -119,9 +119,9 @@ class Game1(View):
                     else:
                         result += 30
                 elif len(set(chosen_numbers)) == 2:
-                    if [1, 1, 5] in chosen_numbers:
+                    if [1, 1] in chosen_numbers and 5 in chosen_numbers: #żle, kolejność jest brana pod uwagę - poprawić wszędzie; tu juz poprawione
                         result += 25
-                    elif [1, 5, 5] in chosen_numbers:
+                    elif [5, 5] in chosen_numbers and 1 in chosen_numbers:
                         result += 20
                     else:
                         return HttpResponseRedirect('/game_1/') #komunikat o błędzie w formularzu
@@ -136,7 +136,7 @@ class Game1(View):
                     else:
                         pass #komunikat o błędzie w formularzu
                 elif len(set(chosen_numbers)) == 2:
-                    if [1, 5] in chosen_numbers:
+                    if 1 in chosen_numbers and 5 in chosen_numbers:
                         result += 15
                     else:
                         return HttpResponseRedirect('/game_1/')#komunikat o błędzie w formularzu
@@ -148,7 +148,9 @@ class Game1(View):
                 else:
                     #komunikat o błędzie w formularzu
                     return HttpResponseRedirect('/game_1/')
-
+            else: #len(chosen_numbers) == 0
+                #komunikat o błędzie w formularzu
+                return HttpResponseRedirect('/game_1/')
             return HttpResponseRedirect('/start/')
         else:
             return HttpResponseRedirect('/start/')#???
