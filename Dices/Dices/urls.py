@@ -18,13 +18,13 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls import url
 from django.conf.urls.static import static
-from dices.views import Game1, Start
+from dices.views import Game1, Start, Total
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('admin/', admin.site.urls),
     path('game_1/', Game1.as_view()),
     path('start/', Start.as_view()),
+    path('total/', Total.as_view()),
     url('^', include('django.contrib.auth.urls')),
 ]
 
