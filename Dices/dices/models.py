@@ -9,3 +9,9 @@ class Roll(models.Model):
     dice_4 = models.IntegerField()
     dice_5 = models.IntegerField()
     game_no = models.IntegerField(unique=True)
+
+
+class Scores(models.Model):
+
+    total = models.IntegerField()
+    player_no = models.IntegerField(unique=True)

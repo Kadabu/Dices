@@ -8,6 +8,9 @@
   <form method="post">
     {% csrf_token %}
     {{ form.put_aside }}
+    {% if form.errors %}
+      Sprawdź, czy formularz jest poprawnie wypełniony.
+    {% endif %}
     <button type="submit" class="btn btn-warning">Put aside</button>
-</form>
+  </form>
 {% endblock %}
