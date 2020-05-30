@@ -9,11 +9,11 @@ from .forms import Game1ChoiceForm
 import random
 
 # Create your views here.
-class Start_Game(View):
+class StartGame(View):
 
     def get(self, request):
         Scores.objects.all().delete()
-        Scores.objects.create(total=0, player_no=1)
+        Scores.objects.create(total=0, dices_amount=5, player_no=1)
         return HttpResponseRedirect('/start/')
 
 
@@ -23,6 +23,9 @@ class Start(View):
         numbers = [random.randrange(1,7) for x in range(5)]
         Roll.objects.all().delete()
         Roll.objects.create(dice_1=numbers[0], dice_2=numbers[1], dice_3=numbers[2], dice_4=numbers[3], dice_5=numbers[4], game_no=1)
+        """Define a loss"""
+        if len(set(numbers)) not in range(4) and 1 not in numbers and 5 not in numbers or len(set(numbers)) == 3 and numbers.count(2) !=3 and numbers.count(3) !=3 and numbers.count(4) !=3 and numbers.count(6) !=3 and 1 not in numbers and 5 not in numbers:
+            return render(request, "loss.html")
         scores = Scores.objects.get(player_no=1)
         return render(request, "start.html", {"scores": scores})
 
@@ -32,13 +35,14 @@ class Game1(View):
     def get(self, request):
         form = Game1ChoiceForm()
         roll = Roll.objects.get(game_no=1)
-        #zdefiniować zupę (if roll.dice_1 != roll.dice_2 itd.); jeśli zupa, wyświetlić zupa.html
-        return render(request, "game_1_start.html", {"form": form, "roll": roll})
+        scores = Scores.objects.get(player_no=1)
+        return render(request, "game_1_start.html", {"form": form, "roll": roll, "scores": scores})
 
     def post(self, request):
         """Obliczanie wyniku na podstawie wyboru z formularza i przekierowanie do strony, gdzie gracz wybiera, czy rzuca dalej"""
         form = Game1ChoiceForm(request.POST)
         roll = Roll.objects.get(game_no=1)
+        scores = Scores.objects.get(player_no=1)
         #zdefiniować błędy w formularzu, tj. niedopuszczalne wybory (odwołując się dp chosen_numbers)
         if form.is_valid():
             put_aside = form.cleaned_data['put_aside']
@@ -156,13 +160,12 @@ class Game1(View):
                 else:
                     #komunikat o błędzie w formularzu
                     return HttpResponseRedirect('/game_1/')
-            scores = Scores.objects.get(player_no=1)
-            print("Total: {}".format(scores.total))
-            print("Chosen numbers: {}".format(chosen_numbers))
-            print("Result: {}".format(result))
             scores.total += result
+            scores.dices_amount -= len(chosen_numbers)
+            if scores.dices_amount == 0:
+                scores.dices_amount += 5
+            print(scores.dices_amount)
             scores.save()
-            print("New total: {}".format(scores.total))
             return HttpResponseRedirect('/start/')
         else: #if form is not is_valid
             return HttpResponseRedirect('/game_1/') #komunikat o błędzie w formularzu/ przez form.add_error??
@@ -171,4 +174,5 @@ class Game1(View):
 class Total(View):
 
     def get(self, request):
-        return render(request, "total.html")
+        scores = Scores.objects.get(player_no=1)
+        return render(request, "total.html", {"scores": scores})

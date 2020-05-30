@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <p>
-    Total score:
-  </p>
+  Your total score: {{ scores.total }}</br>
+  <a href="/start_game/" class="btn btn-info">Play again</a>
 {% endblock %}

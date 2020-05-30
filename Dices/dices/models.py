@@ -14,4 +14,5 @@ class Roll(models.Model):
 class Scores(models.Model):
 
     total = models.IntegerField()
+    dices_amount = models.IntegerField()
     player_no = models.IntegerField(unique=True)
