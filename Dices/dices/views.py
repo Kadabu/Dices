@@ -20,13 +20,35 @@ class StartGame(View):
 class Start(View):
 
     def get(self, request):
-        numbers = [random.randrange(1,7) for x in range(5)]
         Roll.objects.all().delete()
-        Roll.objects.create(dice_1=numbers[0], dice_2=numbers[1], dice_3=numbers[2], dice_4=numbers[3], dice_5=numbers[4], game_no=1)
-        """Define a loss"""
-        if len(set(numbers)) not in range(4) and 1 not in numbers and 5 not in numbers or len(set(numbers)) == 3 and numbers.count(2) !=3 and numbers.count(3) !=3 and numbers.count(4) !=3 and numbers.count(6) !=3 and 1 not in numbers and 5 not in numbers:
-            return render(request, "loss.html")
         scores = Scores.objects.get(player_no=1)
+        numbers = []
+        if scores.dices_amount == 5:
+            numbers = [random.randrange(1,7) for x in range(5)]
+            Roll.objects.create(dice_1=numbers[0], dice_2=numbers[1], dice_3=numbers[2], dice_4=numbers[3], dice_5=numbers[4], game_no=1)
+            """Define a loss"""
+            if numbers.count(2)<3 and numbers.count(3)<3 and numbers.count(4)<3 and numbers.count(6)<3 and 1 not in numbers and 5 not in numbers:
+                return render(request, "loss.html", {"numbers": numbers})
+        if scores.dices_amount == 4:
+            numbers = [random.randrange(1,7) for x in range(4)]
+            Roll.objects.create(dice_1=numbers[0], dice_2=numbers[1], dice_3=numbers[2], dice_4=numbers[3], game_no=1)
+            if numbers.count(2)<3 and numbers.count(3)<3 and numbers.count(4)<3 and numbers.count(6)<3 and 1 not in numbers and 5 not in numbers:
+                return HttpResponseRedirect('/total/')
+        if scores.dices_amount == 3:
+            numbers = [random.randrange(1,7) for x in range(3)]
+            Roll.objects.create(dice_1=numbers[0], dice_2=numbers[1], dice_3=numbers[2], game_no=1)
+            if numbers.count(2) <3 and numbers.count(3) <3 and numbers.count(4) <3 and numbers.count(6) <3 and 1 not in numbers and 5 not in numbers:
+                return HttpResponseRedirect('/total/')
+        if scores.dices_amount == 2:
+            numbers = [random.randrange(1,7) for x in range(2)]
+            Roll.objects.create(dice_1=numbers[0], dice_2=numbers[1], game_no=1)
+            if 1 not in numbers and 5 not in numbers:
+                return HttpResponseRedirect('/total/')
+        if scores.dices_amount == 1:
+            numbers = [random.randrange(1,7) for x in range(1)]
+            Roll.objects.create(dice_1=numbers[0], game_no=1)
+            if 1 not in numbers and 5 not in numbers:
+                return HttpResponseRedirect('/total/')
         return render(request, "start.html", {"scores": scores})
 
 
@@ -164,7 +186,6 @@ class Game1(View):
             scores.dices_amount -= len(chosen_numbers)
             if scores.dices_amount == 0:
                 scores.dices_amount += 5
-            print(scores.dices_amount)
             scores.save()
             return HttpResponseRedirect('/start/')
         else: #if form is not is_valid

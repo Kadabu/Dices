@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+    Your numbers:
+    {% for num in numbers %}
+      {{ num }}
+    {% endfor %}
+    <p>
     YOU HAVE LOST YOUR SCORES</br>
+    </p>
     <a href="/start_game/" class="btn btn-info">Play again</a>
 {% endblock %}
