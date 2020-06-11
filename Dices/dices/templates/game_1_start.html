@@ -3,12 +3,12 @@
 {% block content %}
 {% load static %}
   <div>
-    <h2>Click on your scores:</h2>
+    <h2 class="text-danger">Click on your scores:</h2>
   </div>
   <div>
     {% for roll_dice in roll_dices %}
       {% if roll_dice == 1 %}
-        <img src="{% static "./1.webp" %}" class="dice">
+        <img src="{% static "./1.png" %}" class="dice">
       {% elif roll_dice == 2 %}
         <img src="{% static "./2.png" %}" class="dice">
       {% elif roll_dice == 3 %}
