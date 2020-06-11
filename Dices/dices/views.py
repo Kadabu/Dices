@@ -208,4 +208,15 @@ class Total(View):
     def get(self, request):
         scores = Scores.objects.get(player_no=1)
         roll = Roll.objects.get(game_no=1)
-        return render(request, "total.html", {"scores": scores, "roll": roll})
+        roll_dices = []
+        if scores.dices_amount == 5:
+            roll_dices = [roll.dice_1, roll.dice_2, roll.dice_3, roll.dice_4, roll.dice_5]
+        if scores.dices_amount == 4:
+            roll_dices = [roll.dice_1, roll.dice_2, roll.dice_3, roll.dice_4]
+        if scores.dices_amount == 3:
+            roll_dices = [roll.dice_1, roll.dice_2, roll.dice_3]
+        if scores.dices_amount == 2:
+            roll_dices = [roll.dice_1, roll.dice_2]
+        if scores.dices_amount == 1:
+            roll_dices = [roll.dice_1]
+        return render(request, "total.html", {"scores": scores, "roll": roll, "roll_dices": roll_dices})

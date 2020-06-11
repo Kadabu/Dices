@@ -5,8 +5,10 @@
     {% for num in numbers %}
       {{ num }}
     {% endfor %}
-    <p>
-    YOU HAVE LOST YOUR SCORES</br>
-    </p>
-    <a href="/start_game/" class="btn btn-info">Play again</a>
+    <div>
+      <h2 class="text-danger">YOU HAVE LOST YOUR SCORES</h2>
+    </div>
+    <div>
+      <a href="/start_game/" class="btn btn-info">Play again</a>
+    </div>
 {% endblock %}
