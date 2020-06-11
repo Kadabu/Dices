@@ -1,6 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-  Your total score: {{ scores.total }}</br>
-  <a href="/start_game/" class="btn btn-info">Play again</a>
+  <p>
+    Your numbers:
+    {% if scores.dices_amount == 5 %}
+    {{ roll.dice_1 }} {{ roll.dice_2 }} {{ roll.dice_3 }} {{ roll.dice_4 }} {{ roll.dice_5 }}
+    {% elif scores.dices_amount == 4 %}
+    {{ roll.dice_1 }} {{ roll.dice_2 }} {{ roll.dice_3 }} {{ roll.dice_4 }}
+    {% elif scores.dices_amount == 3 %}
+    {{ roll.dice_1 }} {{ roll.dice_2 }} {{ roll.dice_3 }}
+    {% elif scores.dices_amount == 2 %}
+    {{ roll.dice_1 }} {{ roll.dice_2 }}
+    {% elif scores.dices_amount == 1 %}
+    {{ roll.dice_1 }}
+    {% endif %}
+  </p>
+  <p>
+    Your total score: {{ scores.total }}</br>
+    <a href="/start_game/" class="btn btn-info">Play again</a>
+  </p>
 {% endblock %}

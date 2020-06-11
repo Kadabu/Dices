@@ -1,23 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <p>
-    Your numbers:
-    {% if scores.dices_amount == 5 %}
-    {{ roll.dice_1 }} {{ roll.dice_2 }} {{ roll.dice_3 }} {{ roll.dice_4 }} {{ roll.dice_5 }}
-    {% elif scores.dices_amount == 4 %}
-    {{ roll.dice_1 }} {{ roll.dice_2 }} {{ roll.dice_3 }} {{ roll.dice_4 }}
-    {% elif scores.dices_amount == 3 %}
-    {{ roll.dice_1 }} {{ roll.dice_2 }} {{ roll.dice_3 }}
-    {% elif scores.dices_amount == 2 %}
-    {{ roll.dice_1 }} {{ roll.dice_2 }}
-    {% elif scores.dices_amount == 1 %}
-    {{ roll.dice_1 }}
-    {% endif %}
-  </p>
-  <p>
-    Choose dices to put aside
-  </p>
+{% load static %}
+  <div>
+    <h2>Click on your scores:</h2>
+  </div>
+  <div>
+    {% for roll_dice in roll_dices %}
+      {% if roll_dice == 1 %}
+        <img src="{% static "./1.webp" %}" class="dice">
+      {% elif roll_dice == 2 %}
+        <img src="{% static "./2.png" %}" class="dice">
+      {% elif roll_dice == 3 %}
+        <img src="{% static "./3.png" %}" class="dice">
+      {% elif roll_dice == 4 %}
+        <img src="{% static "./4.png" %}" class="dice">
+      {% elif roll_dice == 5 %}
+        <img src="{% static "./5.png" %}" class="dice">
+      {% elif roll_dice == 6 %}
+        <img src="{% static "./6.png" %}" class="dice">
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% comment %}
   <form method="post">
     {% csrf_token %}
     {{ form.put_aside }}
@@ -27,4 +32,5 @@
     <button type="submit" class="btn btn-warning">Put aside</button>
     <a href="/total/" class="btn btn-info">Show total</a>
   </form>
+  {% endcomment %}
 {% endblock %}
