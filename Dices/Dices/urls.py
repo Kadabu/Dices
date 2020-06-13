@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('game_1/', Game1.as_view()),
     path('start/', Start.as_view()),
-    path('start_game/', StartGame.as_view()),
+    path('dices/', StartGame.as_view()),
     path('total/', Total.as_view()),
     url('^', include('django.contrib.auth.urls')),
 ]

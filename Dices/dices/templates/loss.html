@@ -1,14 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-    Your numbers:
-    {% for num in numbers %}
-      {{ num }}
+{% load static %}
+  <div>
+    <h2 class="text-warning">Your numbers:</h2>
+  </div>
+  <div>
+    {% for roll_dice in roll_dices %}
+      {% if roll_dice == 1 %}
+        <img src="{% static "./1.png" %}" class="dice">
+      {% elif roll_dice == 2 %}
+        <img src="{% static "./2.png" %}" class="dice">
+      {% elif roll_dice == 3 %}
+        <img src="{% static "./3.png" %}" class="dice">
+      {% elif roll_dice == 4 %}
+        <img src="{% static "./4.png" %}" class="dice">
+      {% elif roll_dice == 5 %}
+        <img src="{% static "./5.png" %}" class="dice">
+      {% elif roll_dice == 6 %}
+        <img src="{% static "./6.png" %}" class="dice">
+      {% endif %}
     {% endfor %}
-    <div>
-      <h2 class="text-danger">YOU HAVE LOST YOUR SCORES</h2>
-    </div>
-    <div>
-      <a href="/start_game/" class="btn btn-info">Play again</a>
-    </div>
+   </div>
+  <div>
+    <h2 class="text-danger">YOU HAVE LOST YOUR SCORES!!!</h2>
+  </div>
+  <div>
+    <a href="/dices/" class="btn btn-info">Play again</a>
+  </div>
 {% endblock %}

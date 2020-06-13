@@ -5,7 +5,7 @@
   <div>
     <h2 class="text-warning">Click on your scores:</h2>
   </div>
-  <div>
+  <div id="dices">
     {% for roll_dice in roll_dices %}
       {% if roll_dice == 1 %}
         <img class="dice dice-1" src="{% static "./1.png" %}">
@@ -22,15 +22,14 @@
       {% endif %}
     {% endfor %}
   </div>
-  {% comment %}
-  <form method="post">
-    {% csrf_token %}
-    {{ form.put_aside }}
-    {% if form.errors %}
-      Sprawdź, czy formularz jest poprawnie wypełniony.
-    {% endif %}
-    <button type="submit" class="btn btn-warning">Put aside</button>
-    <a href="/total/" class="btn btn-info">Show total</a>
-  </form>
-  {% endcomment %}
+  <div>
+    <form method="post">
+      {% csrf_token %}
+      <div style="display:none">{{ form.put_aside }}</div>
+      {% if form.errors %}
+      {% endif %}
+      <button type="submit" class="btn btn-warning">Put aside</button>
+      <a href="/total/" class="btn btn-info">Show total</a>
+    </form>
+  </div>
 {% endblock %}
